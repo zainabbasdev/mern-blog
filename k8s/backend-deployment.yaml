@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: mern-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mern-backend
+  template:
+    metadata:
+      labels:
+        app: mern-backend
+    spec:
+      containers:
+        - name: backend-container
+          image: zainabbax/blogging-platform-backend:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MONGODB_STRING
+              value: "mongodb://mongo-service:27017/blogdb"
